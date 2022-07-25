@@ -1,0 +1,37 @@
+// Font
+$font-family-bold: 'Inter-Bold', sans-serif;
+$font-family-semibold: 'Inter-SemiBold', sans-serif;
+$font-family-regular: 'Inter-Regular', sans-serif;
+$font-family-medium: 'Inter-Medium', sans-serif;
+$font-size-default: 18px;
+
+// Default Colors
+$color-text: #000;
+$color-text-light: #fff;
+
+// Margins
+$margin: 20px;
+$padding: 20px;
+
+// Margin & padding loop
+$values: 5 10 20 30 40;
+$positions: top right bottom left;
+
+// Image path
+$image-path: '../assets/images/';
+
+// Retina image suffix
+$image-suffix: '-2x';
+
+// Font path
+$font-path: '../assets/fonts';
+
+// Grid
+$grid-columns: 12;
+$grid-column-gutter: 30px;
+
+// break points
+$xs: 575px;
+$sm: 767px;
+$md: 991px;
+$lg: 1199px;

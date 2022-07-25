@@ -1,0 +1,14 @@
+@import './variables.module';
+@import './mixins.module';
+
+body {
+    background: linear-gradient(to left, #2a2f33, #161B1F);
+    font-display: optional;
+    font-family: $font-family-regular;
+    font-size: $font-size-default;
+    text-align: left;
+}
+
+
+
+
