@@ -1,3 +1,5 @@
+@import './variables.module';
+
 // @include background-image(logo, png, 100px 100px, center, no-repeat);
 @mixin background-image($file, $type, $size, $position, $repeat, $retina: false) {
 

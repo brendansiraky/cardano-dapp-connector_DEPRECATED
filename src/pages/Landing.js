@@ -1,5 +1,11 @@
+import { WalletSelection } from '../components/LandingPage/WalletSelection/WalletSelection'
+import { Banner } from '../components/LandingPage/Banner/Banner'
+
 export const Landing = () => {
     return (
-        <div className="container">Hello world</div>
+        <>
+            <WalletSelection />
+            <Banner />
+        </>
     )
 }

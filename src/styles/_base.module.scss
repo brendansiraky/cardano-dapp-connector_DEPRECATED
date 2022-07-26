@@ -2,11 +2,17 @@
 @import './mixins.module';
 
 body {
-    background: linear-gradient(to left, #2a2f33, #161B1F);
+    background: linear-gradient(to left, #010C1B, #061429);
+    color: $color-text-light;
     font-display: optional;
     font-family: $font-family-regular;
     font-size: $font-size-default;
     text-align: left;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
 }
 
 

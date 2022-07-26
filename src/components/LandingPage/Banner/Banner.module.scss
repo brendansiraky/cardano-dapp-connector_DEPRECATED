@@ -1,0 +1,27 @@
+@import '../../../styles/mixins.module';
+
+.outerWrapper {
+
+    @include position($position: absolute, $top: 0, $left: 0);
+    width: 100%;
+
+    .innerWrapper {
+
+        @include flex(flex, row, wrap, space-between, center);
+        padding: 60px 40px;
+    
+        .logo {
+            @include background-image(cardano-logo-white, png, contain, center, no-repeat);
+            width: 60px;
+            height: 60px;
+        }
+    
+        .linkedIcon {
+            @include background-image(github-logo, svg, contain, center, no-repeat);
+            width: 40px;
+            height: 40px;
+        }
+
+    }
+
+}
