@@ -1,0 +1,92 @@
+@import '../../../styles/mixins.module';
+
+.walletsWrapper {
+
+    @include flex(flex, row, wrap, center, center);
+    min-height: 100vh;
+
+    .walletWrapper {
+
+        @include flex(flex, row, wrap, center, center);
+        width: 200px;
+        height: 200px;
+        border-radius: 10px;
+        transition: all 0.5s;
+        transform: translateY(0, 0px);
+        margin: 0px 20px;
+        cursor: pointer;
+        position: relative;
+
+        &:hover {
+            transform: translate(0px, -5px);
+        }
+
+        &.connected {
+
+            &:after {
+                content: '';
+                @include position($position: absolute, $top: 10px, $right: 10px);
+                @include background-image(tick, svg, contain, center, no-repeat);
+                height: 15px;
+                width: 15px;
+            }
+
+        }
+
+        &.loading {
+             &:after {
+                content: '';
+                @include position($position: absolute, $top: 10px, $right: 10px);
+                @include spinner;
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        &.nami {
+
+            @include background-image(nami-logo, svg, 100px 100px, center, no-repeat);
+            box-shadow: 0px 0px 10px 0px rgba(51, 158, 162, 0.5);
+
+            &:hover {
+                box-shadow: 0px 0px 20px 2px rgba(51, 158, 162, 0.25);
+            }
+
+        }
+
+        &.eternl {
+
+            @include background-image(eternl-logo, svg, 100px 100px, center, no-repeat);
+            box-shadow: 0px 0px 10px 0px rgba(196, 96, 205, 0.5);
+
+            &:hover {
+                box-shadow: 0px 0px 20px 2px rgba(196, 96, 205, 0.25);
+            }
+
+        }
+
+        &.flint {
+
+            @include background-image(flint-logo, svg, 100px 100px, center, no-repeat);
+            box-shadow: 0px 0px 10px 0px rgba(255, 97, 1, 0.5);
+
+            &:hover {
+                box-shadow: 0px 0px 20px 2px rgba(255, 97, 1, 0.25);
+            }
+
+        }
+
+        &.gero {
+
+            @include background-image(gerowallet-logo, svg, 100px 100px, center, no-repeat);
+            box-shadow: 0px 0px 10px 0px rgba(4, 223, 148, 0.5);
+
+            &:hover {
+                box-shadow: 0px 0px 20px 2px rgba(4, 223, 148, 0.25);
+            }
+
+        }
+
+    }
+
+}

@@ -1,6 +1,0 @@
-@import '../../../styles/mixins.module';
-
-.wrapper {
-    @include flex(flex, row, wrap, center, center);
-    min-height: 100vh;
-}

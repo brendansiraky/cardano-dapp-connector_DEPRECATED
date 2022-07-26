@@ -170,3 +170,20 @@
     top: auto;
     transform: none;
 }
+
+
+@mixin spinner {
+
+    @include background-image(spinner, svg, contain, center, no-repeat);
+    animation: rotation 5s infinite linear;
+
+    @keyframes rotation {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(359deg);
+        }
+    }
+
+}
