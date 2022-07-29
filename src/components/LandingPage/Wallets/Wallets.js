@@ -1,5 +1,6 @@
 import { useDappConnector } from '../../../hooks/useDappConnector'
 import styles from './Wallets.module.scss'
+import { WalletInfoBanner } from '../WalletInfoBanner/WalletInfoBanner';
 
 const WALLETS = ['nami', 'eternl', 'flint', 'gero']
 
@@ -13,18 +14,22 @@ export const Wallets = () => {
     } = useDappConnector()
 
     return (
-        <div className={styles.walletsWrapper}>
-            {/* <h1>162.48 ₳</h1> */}
-            {WALLETS.map(wallet => (
-                <Wallet 
-                    key={wallet} 
-                    wallet={wallet}
-                    onClick={() => onWalletSelect(wallet)}
-                    isLoading={isLoading && walletSelected === wallet}
-                    isConnected={!isLoading && walletSelected === wallet}
-                />
-            ))}
-        </div>
+        <>
+            <div className={styles.walletsWrapper}>
+                {WALLETS.map(wallet => (
+                    <Wallet 
+                        key={wallet} 
+                        wallet={wallet}
+                        onClick={() => onWalletSelect(wallet)}
+                        isLoading={isLoading && walletSelected === wallet}
+                        isConnected={!isLoading && walletSelected === wallet}
+                    />
+                ))}
+            </div>
+
+            {walletValues.balance && !isLoading && 
+            <WalletInfoBanner {...walletValues} />}
+        </>
     )
 }
 

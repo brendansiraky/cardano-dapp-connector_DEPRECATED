@@ -1,89 +1,16 @@
-// @import './variables.scss';
-// @import './mixins.scss';
+@import './variables.module.scss';
+@import './mixins.module.scss';
 
-// h1, h2, h3,
-// h4, h5, h6 {
-//     font-family: $font-family-bold;
-//     line-height: 1;
-//     margin: 0;
-//     -moz-osx-font-smoothing: grayscale;
-//     -webkit-font-smoothing: antialiased;
-//     letter-spacing: -0.07em;
-// }
+h1, h2, h3,
+h4, h5, h6 {
+    font-family: $font-family-bold;
+    line-height: 1;
+    margin: 0;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.07em;
+}
 
-// h1 {
-//     font-size: 60px;
-// }
-
-// h2 {
-
-//     font-size: 60px;
-    
-//     @include breakpoint(xs) {
-//         font-size: 42px;
-//     }
-
-// }
-
-// h3 {
-
-//     font-size: 48px;
-    
-//     @include breakpoint(xs) {
-//         font-size: 34px;
-//     }
-
-// }
-
-// h4 {
-
-//     font-size: 38px;
-
-//     @include breakpoint(xs) {
-//         font-size: 26px;
-//     }
-
-// }
-
-// h5 {
-
-//     font-size: 24px;
-
-//     @include breakpoint(xs) {
-//         font-size: 18px;
-//     }
-
-// }
-
-// h6 {
-
-//     font-size: 20px;
-
-//     @include breakpoint(xs) {
-//         font-size: 16px;
-//     }
-
-// }
-
-// a {
-
-//     @include link-color($color-link-default, $color-link-hover, none, underline);
-// 	transition: all .2s ease;
-
-// 	&:focus {
-// 		outline: none;
-// 	}
-
-// }
-
-// p {
-    
-//     font-size: 18px;
-//     line-height: 1.5em;
-//     margin: 0;
-
-//     @include breakpoint(xs) {
-//         font-size: 16px;
-//     }
-
-// }
+h1 {
+    font-size: 55px;
+}

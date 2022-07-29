@@ -8,7 +8,9 @@ export const Banner = () => {
                     <div className="col-lg-12">
                         <div className={styles.innerWrapper}>
                             <div className={styles.logo} />
-                            <div className={styles.linkedIcon} />
+                            <a href="https://github.com/brendansirakydeveloper/cardano-dapp-connector" target="_blank" rel="noreferrer">
+                                <div className={styles.linkedIcon} />
+                            </a>
                         </div>
                     </div>
                 </div>

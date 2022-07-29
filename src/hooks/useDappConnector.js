@@ -75,9 +75,7 @@ export const useDappConnector = () => {
 
             handleUpdateTransition({ loading: false })
         } catch (error) {
-            if (error.message) {
-                toast.error(error.message)
-            }
+            toast.error(error.message)
             handleWalletDisconnect()
             handleUpdateTransition({ loading: false })
         }
@@ -90,16 +88,12 @@ export const useDappConnector = () => {
     function handleWalletDisconnect() {
         handleUpdateWalletValue(DEFAULT_WALLET_VALUES)
         removeWalletSelected()
-        // removeAccessToken()
         handleUpdateTransition({ loading: false })
     }
 
-    /**
-     * Enables the wallet that was chosen by the user
-     * When this executes the user should get a window pop-up
-     * from the wallet asking to approve the connection
-     * of this app to the wallet
-     * @returns {Promise<void>}
+    /*
+        Enables the wallet that was selected by the user.
+        If the site is not already whitelisted, the user will be prompted to approve the connection.
     */
     async function getEnabledWalletApi() {
         try {
@@ -111,7 +105,7 @@ export const useDappConnector = () => {
                 throw new Error('User Denied access to wallet.')
             }
         } catch (error) {
-            throw new Error(error)
+            throw new Error('Unable to access wallet.')
         }
     }
 
@@ -170,7 +164,7 @@ export const useDappConnector = () => {
             const network = networkId === 1 ? 'mainnet' : networkId === 0 ? 'testnet' : null
             handleUpdateWalletValue({ network })
         } catch (error) {
-            toast.error('Error while trying to get the networkId')
+            throw new Error('Error while trying to get the networkId')
         }
     }
 
