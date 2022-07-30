@@ -2,7 +2,7 @@ import { lovelaceToAda } from '../../../utility/lovelaceToAda'
 import { getWalletSelected } from '../../../utility/walletHelpers'
 import styles from './WalletInfoBanner.module.scss'
 
-export const WalletInfoBanner = ({ balance, network }) => {
+export const WalletInfoBanner = ({ balance, network, walletIsConnected }) => {
 
     const walletSelected = getWalletSelected()
 
@@ -10,12 +10,12 @@ export const WalletInfoBanner = ({ balance, network }) => {
         <div className={styles.outerWrapper}>
             <div className={styles.innerWrapper}>
                 <div className={styles.connectedWalletWrapper}>
-                    <div className={`${styles.walletIcon} ${styles[walletSelected]}`} />
-                    <h4>{walletSelected}</h4>
-                    <span>({network})</span>
+                    {walletIsConnected && <div className={`${styles.walletIcon} ${styles[walletSelected]}`} />}
+                    <h4>{walletIsConnected ? walletSelected : 'No Wallet Connected'}</h4>
+                    {walletIsConnected && <span>({network})</span>}
                 </div>
                 <div className={styles.balanceWrapper}>
-                    <h1>{(lovelaceToAda(Number(balance))).toFixed(2)} ₳</h1>
+                    <h1>{walletIsConnected ? (lovelaceToAda(Number(balance))).toFixed(2) : '0.00'} ₳</h1>
                 </div>
             </div>
         </div>

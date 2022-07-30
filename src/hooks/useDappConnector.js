@@ -1,34 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-import { toast } from 'react-toastify'
 // import Web3Token from 'web3-cardano-token/dist/browser'
 import { Address, TransactionUnspentOutput, Value } from '@emurgo/cardano-serialization-lib-asmjs'
-
-import { useTransition } from './useTransition'
-import { getWalletSelected, setWalletSelected, removeWalletSelected } from '../utility/walletHelpers'
-
+import { toast } from 'react-toastify'
 import _Buffer from 'buffer'
+
+import { getWalletSelected, setWalletSelected, removeWalletSelected } from '../utility/walletHelpers'
+import { DEFAULT_WALLET_VALUES, useWalletActions } from './useWalletActions'
+import { useTransition } from './useTransition'
+
 const Buffer = _Buffer.Buffer
-
-const DEFAULT_WALLET_VALUES = {
-    address: null,
-    balance: null,
-    network: null,
-    walletEnabled: false,
-}
-
-const useWalletActions = () => {
-    const [walletValues, setWalletValues] = useState(DEFAULT_WALLET_VALUES)
-
-    const handleUpdateWalletValue = (objToUpdate) => {
-        setWalletValues(prev => ({
-            ...prev,
-            ...objToUpdate
-        }))
-    }
-
-    return [handleUpdateWalletValue, walletValues]
-}
 
 export const useDappConnector = () => {
     const [handleUpdateTransition, transition] = useTransition()

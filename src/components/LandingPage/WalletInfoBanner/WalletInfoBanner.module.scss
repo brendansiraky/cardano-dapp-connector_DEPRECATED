@@ -1,9 +1,13 @@
 @import '../../../styles/mixins.module';
 
 .outerWrapper {
-    
-    @include position($position: absolute, $top: 160px, $left: 0);
-    width: 100%;
+
+    margin: 40px 0 40px;
+    min-height: 100px;
+
+    @include breakpoint(xs) {
+        margin-top: 160px;
+    }
 
     .innerWrapper {
 

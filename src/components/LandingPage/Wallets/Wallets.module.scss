@@ -2,8 +2,14 @@
 
 .walletsWrapper {
 
-    @include flex(flex, row, wrap, center, center);
+    @include flex(flex, column, wrap, center, center);
     min-height: 100vh;
+
+    @include breakpoint(md) {
+        .walletWrapper:nth-child(-n+2) {
+            margin-bottom: 30px;
+        }
+    }
 
     .walletWrapper {
 
@@ -13,9 +19,13 @@
         border-radius: 10px;
         transition: all 0.5s;
         transform: translateY(0, 0px);
-        margin: 0px 20px;
+        margin: 0px auto;
         cursor: pointer;
         position: relative;
+
+        @include breakpoint(md) {
+   
+        }
 
         &:hover, &.connected {
             transform: translate(0px, -5px);
