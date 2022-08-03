@@ -13,13 +13,13 @@ import { fetcher } from './fetcher'
 export async function authenticateUser() {
     try {
         const result = await getProfile()
+        
         const rawChangeAddress = await getChangeAddress()
         const friendlyChangeAddress = makeFriendlyChangeAddress(rawChangeAddress)
 
         if (result.id !== friendlyChangeAddress) {
             throw new Error(401)
         }
-
     } catch (error) {
         if (error === 404 || error.message === '401') {
             const rawChangeAddress = await getChangeAddress()
@@ -50,6 +50,8 @@ export async function authenticateUser() {
             } else {
                 throw new Error('Unable to authenticate')
             }
+        } else {
+            throw new Error('Unable to authenticate')
         }
     }
 }
