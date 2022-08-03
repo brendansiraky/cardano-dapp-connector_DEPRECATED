@@ -7,10 +7,10 @@ import { DEFAULT_WALLET_VALUES, useWalletActions } from './useWalletActions'
 import { getEnabledWalletApi } from '../utility/getEnabledWalletApi'
 import { authenticateUser } from '../utility/authenticateUser'
 import { getChangeAddress } from '../utility/getChangeAddress'
+import { removeAccessToken } from '../utility/accessToken'
 import { getNetwork } from '../utility/getNetwork'
 import { getBalance } from '../utility/getBalance'
 import { useTransition } from './useTransition'
-import { removeAccessToken } from '../utility/accessToken'
 
 export const useDappConnector = () => {
     const [handleUpdateTransition, transition] = useTransition()
