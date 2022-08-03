@@ -5,7 +5,7 @@ export const Banner = () => {
         <div className={styles.outerWrapper}>
             <div className={styles.innerWrapper}>
                 <div className={styles.logo} />
-                <a href="https://github.com/brendansirakydeveloper/cardano-dapp-connector" target="_blank" rel="noreferrer">
+                <a href="https://github.com/brendansiraky/cardano-dapp-connector" target="_blank" rel="noreferrer">
                     <div className={styles.linkedIcon} />
                 </a>
             </div>

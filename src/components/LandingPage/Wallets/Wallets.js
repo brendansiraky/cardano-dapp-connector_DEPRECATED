@@ -30,9 +30,8 @@ export const Wallets = () => {
                 <div className="container">
                     <div className="row middle">
                         {WALLETS.map(wallet => (
-                            <div className="col-lg-3 col-md-6 col-xs-12">
+                            <div key={wallet} className="col-lg-3 col-md-6 col-xs-12">
                                 <Wallet 
-                                    key={wallet} 
                                     wallet={wallet}
                                     onClick={() => handleWalletClick(wallet)}
                                     isLoading={isLoading && walletSelected === wallet}

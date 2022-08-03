@@ -1,15 +1,16 @@
 import { useEffect } from 'react'
-
-// import Web3Token from 'web3-cardano-token/dist/browser'
-import { Address, TransactionUnspentOutput, Value } from '@emurgo/cardano-serialization-lib-asmjs'
 import { toast } from 'react-toastify'
-import _Buffer from 'buffer'
 
 import { getWalletSelected, setWalletSelected, removeWalletSelected } from '../utility/walletHelpers'
+import { makeFriendlyChangeAddress } from '../utility/makeFriendlyChangeAddress'
 import { DEFAULT_WALLET_VALUES, useWalletActions } from './useWalletActions'
+import { getEnabledWalletApi } from '../utility/getEnabledWalletApi'
+import { authenticateUser } from '../utility/authenticateUser'
+import { getChangeAddress } from '../utility/getChangeAddress'
+import { getNetwork } from '../utility/getNetwork'
+import { getBalance } from '../utility/getBalance'
 import { useTransition } from './useTransition'
-
-const Buffer = _Buffer.Buffer
+import { removeAccessToken } from '../utility/accessToken'
 
 export const useDappConnector = () => {
     const [handleUpdateTransition, transition] = useTransition()
@@ -17,6 +18,8 @@ export const useDappConnector = () => {
 
     useEffect(() => {
         const walletSelected = getWalletSelected()
+
+        // Slight hacky fix here due to the component mounting before the some of the wallets have been injected into the window object.
         setTimeout(() => {
             if (walletSelected) {
                 handleWalletSelect(walletSelected)
@@ -27,7 +30,6 @@ export const useDappConnector = () => {
 
     async function handleWalletSelect(wallet) {
         try {
-
             // Set the browser storage to the wallet that we have selected
             setWalletSelected(wallet)
 
@@ -38,7 +40,7 @@ export const useDappConnector = () => {
             await getEnabledWalletApi()
             
             // // Authenticate the user
-            // await handleAuthenticateUser()
+            await authenticateUser()
             
             // Set the address
             await handleSetChangeAddress()
@@ -52,8 +54,6 @@ export const useDappConnector = () => {
             // Set isWalletEnabled
             await handleSetWalletEnabled()
 
-            // await getUser()
-
             handleUpdateTransition({ loading: false })
         } catch (error) {
             toast.error(error.message)
@@ -62,32 +62,11 @@ export const useDappConnector = () => {
         }
     }
 
-    function makeFriendlyChangeAddress(changeAddress) {
-        return Address.from_bytes(Buffer.from(changeAddress, "hex")).to_bech32()
-    }
-
     function handleWalletDisconnect() {
         handleUpdateWalletValue(DEFAULT_WALLET_VALUES)
         removeWalletSelected()
+        removeAccessToken()
         handleUpdateTransition({ loading: false })
-    }
-
-    /*
-        Enables the wallet that was selected by the user.
-        If the site is not already whitelisted, the user will be prompted to approve the connection.
-    */
-    async function getEnabledWalletApi() {
-        try {
-            const wallet = getWalletSelected()
-            if (wallet) {
-                const API = await window.cardano[wallet].enable()
-                return API
-            } else {
-                throw new Error('User Denied access to wallet.')
-            }
-        } catch (error) {
-            throw new Error('Unable to access wallet.')
-        }
     }
 
     async function handleSetChangeAddress() {
@@ -100,52 +79,21 @@ export const useDappConnector = () => {
         }
     }
 
-    /**
-     * Get the address from the wallet into which any spare UTXO should be sent
-     * as change when building transactions.
-     * @returns {Promise<void>}
-    */
-    async function getChangeAddress() {
-        try {
-            const API = await getEnabledWalletApi()
-            const rawChangeAddress = await API.getChangeAddress()
-            return rawChangeAddress
-        } catch (err) {
-            throw new Error('Error getting the change address!')
-        }
-    }
-
-    /**
-     * Gets the current balance of in Lovelace in the user's wallet
-     * This doesnt resturn the amounts of all other Tokens
-     * For other tokens you need to look into the full UTXO list
-     * @returns {Promise<void>}
-    */
     async function handleSetBalance() {
         try {
-            const API = await getEnabledWalletApi()
-            const balanceCBORHex = API && API.getBalance && await API.getBalance()
-            const balance = Value.from_bytes(Buffer.from(balanceCBORHex, "hex")).coin().to_str()
+            const balance = await getBalance()
             handleUpdateWalletValue({ balance })
         } catch (err) {
             throw new Error('Error found when getting balance!')
         }
     }
 
-    /**
-     * Gets the Network ID to which the wallet is connected
-     * 0 = testnet
-     * 1 = mainnet
-     * @returns {Promise<void>}
-    */
     async function handleSetNetwork() {
         try {
-            const API = await getEnabledWalletApi()
-            const networkId = await API.getNetworkId()
-            const network = networkId === 1 ? 'mainnet' : networkId === 0 ? 'testnet' : null
+            const network = await getNetwork()
             handleUpdateWalletValue({ network })
         } catch (error) {
-            throw new Error('Error while trying to get the networkId')
+            throw new Error('Error while trying to get the network')
         }
     }
 
