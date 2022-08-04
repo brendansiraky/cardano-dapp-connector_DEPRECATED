@@ -1,4 +1,4 @@
-# cardano-dapp-connector
+# 🖥 cardano-dapp-connector 🖥
 
 ### Cardano Dapp Connector with Authentication.
 
