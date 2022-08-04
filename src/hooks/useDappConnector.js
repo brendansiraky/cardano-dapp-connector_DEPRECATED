@@ -24,7 +24,7 @@ export const useDappConnector = () => {
             if (walletSelected) {
                 handleWalletSelect(walletSelected)
             }
-        }, 1000)
+        }, 500)
         // eslint-disable-next-line
     }, [])
 
