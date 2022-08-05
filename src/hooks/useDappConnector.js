@@ -3,8 +3,10 @@ import { toast } from 'react-toastify'
 
 import { getWalletSelected, setWalletSelected, removeWalletSelected } from '../utility/walletHelpers'
 import { makeFriendlyChangeAddress } from '../utility/makeFriendlyChangeAddress'
+import { buildAndSendAdaTransaction } from '../utility/buildAndSendTransaction'
 import { DEFAULT_WALLET_VALUES, useWalletActions } from './useWalletActions'
 import { getEnabledWalletApi } from '../utility/getEnabledWalletApi'
+import { getOutputAddress } from '../utility/getOutputAddress'
 import { authenticateUser } from '../utility/authenticateUser'
 import { getChangeAddress } from '../utility/getChangeAddress'
 import { removeAccessToken } from '../utility/accessToken'
@@ -109,12 +111,23 @@ export const useDappConnector = () => {
         }
     }
 
+    async function handleBuildAndSendAdaTransaction(amount) {
+        try {
+            const outputAddress = getOutputAddress(walletValues.network)
+            buildAndSendAdaTransaction(amount, outputAddress, walletValues.address)
+        } catch (error) {
+            toast.error('Error caught when trying to build and send transaction')
+        }
+
+    }
+
     return {
         onWalletSelect: handleWalletSelect,
         onWalletDisconnect: handleWalletDisconnect,
         walletSelected: getWalletSelected(),
         isLoading: transition.loading,
-        walletValues
+        walletValues,
+        onSendTransaction: handleBuildAndSendAdaTransaction
     }
 
 }

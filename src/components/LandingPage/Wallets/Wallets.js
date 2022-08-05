@@ -1,5 +1,6 @@
 import { useDappConnector } from '../../../hooks/useDappConnector'
 import { WalletInfoBanner } from '../WalletInfoBanner/WalletInfoBanner'
+import { Donate } from '../Donate/Donate'
 import styles from './Wallets.module.scss'
 
 const WALLETS = ['nami', 'eternl', 'flint', 'gero']
@@ -10,10 +11,9 @@ export const Wallets = () => {
         onWalletDisconnect,
         walletSelected,
         isLoading,
-        walletValues
+        walletValues,
+        onSendTransaction
     } = useDappConnector()
-
-    const walletIsConnected = !isLoading && walletSelected
 
     function handleWalletClick(wallet) {
         if (walletSelected === wallet) {
@@ -22,6 +22,8 @@ export const Wallets = () => {
             onWalletSelect(wallet)
         }
     }
+
+    const walletIsConnected = !isLoading && walletSelected
 
     return (
         <>
@@ -42,6 +44,7 @@ export const Wallets = () => {
                     </div>
                 </div>
             </div>
+            {walletIsConnected && <Donate onDonate={onSendTransaction} />}
         </>
     )
 }

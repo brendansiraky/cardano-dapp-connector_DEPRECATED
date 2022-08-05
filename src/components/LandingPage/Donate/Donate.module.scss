@@ -1,0 +1,48 @@
+@import '../../../styles/mixins.module';
+
+.wrapper {
+
+    @include position($position: absolute, $bottom: 20px, $right: 20px);
+    @include flex(flex, row, wrap, center, center);
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .inputContainer {
+
+        padding: 5px 0;
+        border-bottom: solid 1px #fff;
+
+        input {
+
+            color: #fff;
+            font-size: 22px;
+            border: none;
+            background-color: transparent;
+            text-align: right;
+            width: 100px;
+
+            &::placeholder {
+                color: #fff;
+            }
+
+        }
+
+    }
+
+    button {
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-left: 10px;
+    }
+
+}

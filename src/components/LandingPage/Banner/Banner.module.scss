@@ -9,7 +9,11 @@
 
         @include flex(flex, row, wrap, space-between, center);
         padding: 60px;
-    
+
+        @include breakpoint(sm) {
+            padding: 20px;
+        }
+            
         .logo {
             @include background-image(cardano-logo-white, png, contain, center, no-repeat);
             width: 60px;
