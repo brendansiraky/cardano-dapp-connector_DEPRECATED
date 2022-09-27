@@ -11,6 +11,7 @@ import { getNonce } from './getNonce'
 import { fetcher } from './fetcher'
 
 export async function authenticateUser() {
+
     try {
         const result = await getProfile()
         
@@ -22,6 +23,7 @@ export async function authenticateUser() {
         }
     } catch (error) {
         if (error === 404 || error.message === '401') {
+
             const rawChangeAddress = await getChangeAddress()
             const friendlyChangeAddress = makeFriendlyChangeAddress(rawChangeAddress)
             const nonce = await getNonce(friendlyChangeAddress)

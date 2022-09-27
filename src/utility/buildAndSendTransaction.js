@@ -87,8 +87,6 @@ export const buildAndSendAdaTransaction = async (ada, outputAddress, changeAddre
         const utxos = await getUtxos()
         const amount = adaToLovelace(ada).toFixed()
 
-        console.log({ outputAddress, changeAddress })
-
         const txBuilder = await initTransactionBuilder()
         const shelleyOutputAddress = Address.from_bech32(outputAddress);
         const shelleyChangeAddress = Address.from_bech32(changeAddress);
